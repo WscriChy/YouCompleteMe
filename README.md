@@ -293,9 +293,10 @@ User Guide
 - If the offered completions are too broad, keep typing characters; YCM will
   continue refining the offered completions based on your input.
 - Filtering is "smart-case" sensitive; if you are typing only lowercase letters,
-  then it's case-insensitive. If your input involves uppercase letters, then
-  it's case-sensitive. So "foo" matches "Foo" and "foo", but "Foo" matches "Foo"
-  but not "foo".
+  then it's case-insensitive. If your input contains uppercase letters, then the
+  uppercase letters in your query must match uppercase letters in the completion
+  strings (the lowercase letters still match both). So, "foo" matches "Foo" and
+  "foo", "Foo" matches "Foo" and "FOO" but not "foo".
 - Use the TAB key to accept a completion and continue pressing TAB to cycle
   through the completions. Use Shift-TAB to cycle backwards. Note that if you're
   using console Vim (that is, not Gvim or MacVim) then it's likely that the
@@ -562,7 +563,7 @@ The various `GoTo*` subcommands add entries to Vim's `jumplist` so you can use
 
 Looks up the symbol under the cursor and jumps to its declaration.
 
-Supported in filetypes: `c, cpp, objc, objcpp, python`
+Supported in filetypes: `c, cpp, objc, objcpp, python, cs`
 
 ### The `GoToDefinition` subcommand
 
@@ -573,7 +574,7 @@ the definition of the symbol is in the current translation unit. A translation
 unit consists of the file you are editing and all the files you are including
 with `#include` directives (directly or indirectly) in that file.
 
-Supported in filetypes: `c, cpp, objc, objcpp, python`
+Supported in filetypes: `c, cpp, objc, objcpp, python, cs`
 
 ### The `GoToDefinitionElseDeclaration` subcommand
 
@@ -581,7 +582,7 @@ Looks up the symbol under the cursor and jumps to its definition if possible; if
 the definition is not accessible from the current translation unit, jumps to the
 symbol's declaration.
 
-Supported in filetypes: `c, cpp, objc, objcpp, python`
+Supported in filetypes: `c, cpp, objc, objcpp, python, cs`
 
 ### The `ClearCompilationFlagCache` subcommand
 
@@ -594,6 +595,27 @@ This command clears that cache entirely. YCM will then re-query your
 `FlagsForFile` function as needed in the future.
 
 Supported in filetypes: `c, cpp, objc, objcpp`
+
+### The `StartServer` subcommand
+
+Starts the semantic-engine-as-localhost-server for those semantic engines that
+work as separate servers that YCM talks to.
+
+Supported in filetypes: `cs`
+
+### The `StopServer` subcommand
+
+Stops the semantic-engine-as-localhost-server for those semantic engines that
+work as separate servers that YCM talks to.
+
+Supported in filetypes: `cs`
+
+### The `RestartServer` subcommand
+
+Restarts the semantic-engine-as-localhost-server for those semantic engines that
+work as separate servers that YCM talks to.
+
+Supported in filetypes: `cs`
 
 Options
 -------
@@ -809,6 +831,33 @@ Usually at least 95% of the keywords are successfully extracted.
 Default: `0`
 
     let g:ycm_seed_identifiers_with_syntax = 0
+
+### The `g:ycm_csharp_server_port` option
+
+The port number (on `localhost`) on which the OmniSharp server should be
+started.
+
+Default: `2000`
+
+    let g:ycm_csharp_server_port = 2000
+
+### The `g:ycm_auto_start_csharp_server` option
+
+When set to `1`, the OmniSharp server will be automatically started (once per
+Vim session) when you open a C# file.
+
+Default: `1`
+
+    let g:ycm_auto_start_csharp_server = 1
+
+### The `g:ycm_auto_stop_csharp_server` option
+
+When set to `1`, the OmniSharp server will be automatically stopped upon
+closing Vim.
+
+Default: `1`
+
+    let g:ycm_auto_stop_csharp_server = 1
 
 ### The `g:ycm_add_preview_to_completeopt` option
 
