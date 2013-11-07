@@ -44,14 +44,24 @@ Here are the things you should do when creating an issue:
 1. **Write a step-by-step procedure that when performed repeatedly reproduces
    your issue.** If we can't reproduce the issue, then we can't fix it. It's
    that simple.
-2. **Create a test case for your issue**. This is critical. Don't talk about how
+2. Put the following options in your vimrc:
+   
+   ```viml
+   let g:ycm_server_use_vim_stdout = 1
+   let g:ycm_server_log_level = 'debug'
+   ```
+   
+   Then start gvim/macvim (not console vim) from the console. As you use Vim,
+   you'll see the `ycmd` debug output stream in the console. Attach that to you
+   issue.
+3. **Create a test case for your issue**. This is critical. Don't talk about how
    "when I have X in my file" or similar, _create a file with X in it_ and put
    the contents inside code blocks in your issue description. Try to make this
    test file _as small as possible_. Don't just paste a huge, 500 line source
    file you were editing and present that as a test. _Minimize_ the file so that
    the problem is reproduced with the smallest possible amount of test data.
-3. **Include your OS and OS version.**
-4. **Include the output of `vim --version`.**
+4. **Include your OS and OS version.**
+5. **Include the output of `vim --version`.**
 
 
 Creating good pull requests
@@ -82,7 +92,7 @@ Creating good pull requests
     Please include details on exactly what you would like to see, and why. The
     why is important - it's not always clear why a feature is really useful. And
     sometimes what you want can be done in a different way if the reason for the
-    change is known. _What goal are you trying to accomplish?_
+    change is known. _What goal is your change trying to accomplish?_
 
 [build-bots]: https://travis-ci.org/Valloric/YouCompleteMe
 [ycm-users]: https://groups.google.com/forum/?hl=en#!forum/ycm-users
